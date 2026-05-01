@@ -11,7 +11,7 @@ const statusLabels: Record<string, string> = {
 
 export default function TaskList() {
   const navigate = useNavigate()
-  const { state, updateTaskStatus } = useTaskContext()
+  const { state, updateTaskStatus, deleteCompletedTasks } = useTaskContext()
   const [toast, setToast] = useState<string | null>(null)
 
   const showToast = useCallback((message: string) => {
@@ -30,6 +30,17 @@ export default function TaskList() {
     showToast(`Статус изменен на: ${statusLabels[newStatus]}`)
   }
 
+  async function handleDeleteCompleted() {
+    const completedCount = state.tasks.filter(t => t.status === 'done').length
+    if (completedCount === 0) {
+      showToast('Нет выполненных задач')
+      return
+    }
+    if (!window.confirm(`Удалить ${completedCount} выполненных задач?`)) return
+    const count = await deleteCompletedTasks()
+    showToast(`Удалено выполненных: ${count}`)
+  }
+
   if (state.loading) {
     return <div className="p-4 text-center text-hacker-text font-mono">Загрузка...</div>
   }
@@ -37,13 +48,13 @@ export default function TaskList() {
   return (
     <div className="p-4 pb-20 font-mono">
       {state.error && (
-        <div className="bg-hacker-surface border-2 border-hacker-accent text-hacker-accent p-3 mb-4 text-sm">
+        <div className="bg-hacker-surface border-2 border-hacker-accent text-hacker-accent p-3 mb-4 text-sm glow-console">
           {state.error}
         </div>
       )}
       
       {state.tasks.length === 0 ? (
-        <p className="text-hacker-text text-center mt-8">Список задач пуст</p>
+        <p className="text-hacker-text text-center mt-8 glow-console-text">Список задач пуст</p>
       ) : (
         <div className="space-y-3">
           {state.tasks.map(task => (
@@ -58,14 +69,22 @@ export default function TaskList() {
       
       <button
         onClick={() => navigate('/task/new')}
-        className="fixed bottom-6 right-6 bg-hacker-surface border-2 border-hacker-accent text-hacker-accent w-14 h-14 text-3xl flex items-center justify-center active:scale-95 transition-transform font-mono"
+        className="fixed bottom-6 right-6 bg-hacker-surface border-2 border-hacker-accent text-hacker-accent w-14 h-14 text-3xl flex items-center justify-center active:scale-95 transition-transform font-mono glow-console"
         aria-label="Добавить задачу"
       >
         +
       </button>
 
+      <button
+        onClick={handleDeleteCompleted}
+        className="fixed bottom-6 left-6 bg-hacker-surface border-2 border-hacker-accentBlue text-hacker-accentBlue w-14 h-14 text-2xl flex items-center justify-center active:scale-95 transition-transform font-mono glow-console-blue"
+        aria-label="Удалить выполненные задачи"
+      >
+        ✗
+      </button>
+
       {toast && (
-        <div className="fixed bottom-24 left-1/2 -translate-x-1/2 bg-hacker-surface border-2 border-hacker-accent text-hacker-accent px-4 py-2 text-sm animate-fade-in font-mono">
+        <div className="fixed bottom-24 left-1/2 -translate-x-1/2 bg-hacker-surface border-2 border-hacker-accent text-hacker-accent px-4 py-2 text-sm animate-fade-in font-mono glow-console">
           {toast}
         </div>
       )}

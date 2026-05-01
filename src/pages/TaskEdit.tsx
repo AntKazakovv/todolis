@@ -65,38 +65,38 @@ export default function TaskEdit() {
     <div className="p-4 font-mono">
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div>
-          <label htmlFor="text" className="block text-sm font-medium text-hacker-text mb-1">
+          <label htmlFor="text" className="block text-sm font-medium text-hacker-text mb-1 glow-console-text">
             Описание задачи
           </label>
           <textarea
             id="text"
             {...register('text', { required: 'Введите описание' })}
-            className="w-full p-3 border-2 border-hacker-border bg-hacker-surface text-hacker-textBright min-h-[100px] text-base focus:border-hacker-accent outline-none"
+            className="w-full p-3 border-2 border-hacker-border bg-hacker-surface text-hacker-textBright min-h-[100px] text-base focus:border-hacker-accent outline-none glow-console"
             placeholder="Что нужно сделать?"
           />
-          {errors.text && <p className="text-hacker-accent text-sm mt-1">{errors.text.message}</p>}
+          {errors.text && <p className="text-hacker-accent text-sm mt-1 glow-console-text">{errors.text.message}</p>}
         </div>
 
         <div>
-          <label htmlFor="time" className="block text-sm font-medium text-hacker-text mb-1">
+          <label htmlFor="time" className="block text-sm font-medium text-hacker-text mb-1 glow-console-text">
             Время (необязательно)
           </label>
           <input
             id="time"
             type="time"
             {...register('time')}
-            className="w-full p-3 border-2 border-hacker-border bg-hacker-surface text-hacker-textBright text-base focus:border-hacker-accent outline-none"
+            className="w-full p-3 border-2 border-hacker-border bg-hacker-surface text-hacker-textBright text-base focus:border-hacker-accent outline-none glow-console"
           />
         </div>
 
         <div>
-          <label htmlFor="status" className="block text-sm font-medium text-hacker-text mb-1">
+          <label htmlFor="status" className="block text-sm font-medium text-hacker-text mb-1 glow-console-text">
             Статус
           </label>
           <select
             id="status"
             {...register('status')}
-            className="w-full p-3 border-2 border-hacker-border bg-hacker-surface text-hacker-textBright text-base focus:border-hacker-accent outline-none"
+            className="w-full p-3 border-2 border-hacker-border bg-hacker-surface text-hacker-textBright text-base focus:border-hacker-accent outline-none glow-console"
           >
             <option value="queued">В очереди</option>
             <option value="in-progress">В работе</option>
@@ -106,7 +106,7 @@ export default function TaskEdit() {
 
         <button
           type="submit"
-          className="w-full bg-hacker-surface border-2 border-hacker-accent text-hacker-accent py-3 text-base font-medium active:bg-hacker-border min-h-[44px]"
+          className="w-full bg-hacker-surface border-2 border-hacker-accent text-hacker-accent py-3 text-base font-medium active:bg-hacker-border min-h-[44px] glow-console"
         >
           Сохранить
         </button>
@@ -115,7 +115,7 @@ export default function TaskEdit() {
           <button
             type="button"
             onClick={handleDelete}
-            className="w-full bg-hacker-surface border-2 border-hacker-text text-hacker-text py-3 text-base font-medium active:bg-hacker-border min-h-[44px]"
+            className="w-full bg-hacker-surface border-2 border-hacker-text text-hacker-text py-3 text-base font-medium active:bg-hacker-border min-h-[44px] glow-console"
           >
             Удалить задачу
           </button>

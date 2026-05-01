@@ -65,6 +65,16 @@ export async function clearAllTasks(): Promise<void> {
   await db.clear(STORE_NAME)
 }
 
+export async function deleteCompletedTasks(): Promise<number> {
+  const db = await getDb()
+  const tasks = await db.getAll(STORE_NAME)
+  const completed = tasks.filter(t => t.status === 'done')
+  for (const task of completed) {
+    await db.delete(STORE_NAME, task.id)
+  }
+  return completed.length
+}
+
 export async function exportToJSON(): Promise<string> {
   const tasks = await getAllTasks()
   return JSON.stringify(tasks, null, 2)

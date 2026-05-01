@@ -46,3 +46,6 @@ src/
 - No ESLint configured - rely on TypeScript strict checks
 - PWA features enabled via vite-plugin-pwa
 - All task data stored locally in IndexedDB
+
+# Rules
+- Никогда не делай коммиты без разрешения

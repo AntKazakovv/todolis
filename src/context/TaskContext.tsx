@@ -16,6 +16,7 @@ type TaskAction =
   | { type: 'SET_LOADING'; payload: boolean }
   | { type: 'SET_ERROR'; payload: string | null }
   | { type: 'CLEAR_ALL' }
+  | { type: 'DELETE_COMPLETED' }
 
 const initialState: TaskState = {
   tasks: [],
@@ -38,6 +39,8 @@ function taskReducer(state: TaskState, action: TaskAction): TaskState {
       return { ...state, tasks: state.tasks.filter(t => t.id !== action.payload) }
     case 'CLEAR_ALL':
       return { ...state, tasks: [] }
+    case 'DELETE_COMPLETED':
+      return { ...state, tasks: state.tasks.filter(t => t.status !== 'done') }
     case 'SET_LOADING':
       return { ...state, loading: action.payload }
     case 'SET_ERROR':
@@ -55,6 +58,7 @@ interface TaskContextType {
   deleteTask: (id: string) => Promise<void>
   updateTaskStatus: (id: string, status: TaskStatus) => Promise<void>
   clearAllTasks: () => Promise<void>
+  deleteCompletedTasks: () => Promise<number>
   exportToJSON: () => Promise<string>
   importFromJSON: (json: string) => Promise<Task[]>
 }
@@ -98,6 +102,12 @@ export function TaskProvider({ children }: { children: ReactNode }) {
     dispatch({ type: 'CLEAR_ALL' })
   }
 
+  async function deleteCompletedTasksFn() {
+    const count = await db.deleteCompletedTasks()
+    dispatch({ type: 'DELETE_COMPLETED' })
+    return count
+  }
+
   async function exportToJSON() {
     return db.exportToJSON()
   }
@@ -122,6 +132,7 @@ export function TaskProvider({ children }: { children: ReactNode }) {
         deleteTask: deleteTaskFn,
         updateTaskStatus,
         clearAllTasks,
+        deleteCompletedTasks: deleteCompletedTasksFn,
         exportToJSON,
         importFromJSON,
       }}

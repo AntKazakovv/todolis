@@ -8,8 +8,8 @@ interface TaskCardProps {
 
 const statusColors = {
   'queued': 'bg-hacker-text',
-  'in-progress': 'bg-hacker-accent',
-  'done': 'bg-hacker-accentBright',
+  'in-progress': 'bg-hacker-accentBlue',
+  'done': 'bg-hacker-accentRed',
 }
 
 const statusLabels = {
@@ -24,7 +24,7 @@ export default function TaskCard({ task, onStatusClick }: TaskCardProps) {
   return (
     <div
       onClick={() => navigate(`/task/${task.id}`)}
-      className="flex items-center gap-3 p-4 bg-hacker-surface border-2 border-hacker-border min-h-[60px] active:bg-hacker-border cursor-pointer font-mono"
+      className="flex items-center gap-3 p-4 bg-hacker-surface border-2 border-hacker-border min-h-[60px] active:bg-hacker-border cursor-pointer font-mono glow-console"
     >
       <div
         className="p-3 -m-3 cursor-pointer active:scale-95 transition-transform"

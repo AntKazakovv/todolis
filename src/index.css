@@ -27,3 +27,15 @@ body {
 .animate-fade-in {
   animation: fade-in 0.2s ease-out;
 }
+
+.glow-console {
+  box-shadow: 0 0 6px rgb(138 154 138 / 59%), inset 0 0 8px rgba(138, 154, 138, 0.05);
+}
+
+.glow-console-text {
+  text-shadow: 0 0 4px rgba(138, 154, 138, 0.3);
+}
+
+.glow-console-blue {
+  box-shadow: 0 0 6px rgb(65 69 203 / 59%), inset 0 0 8px rgba(65, 69, 203, 0.05);
+}

@@ -9,13 +9,16 @@ export default {
       colors: {
         hacker: {
           bg: '#0a0e0a',
-          surface: '#111511',
-          border: '#2a3a2a',
+          surface: 'rgb(24 31 24)',
+          border: '#47945b',
+          // botder: 'rgb(62 109 62)',
           borderLight: '#3a4a3a',
           text: '#8a9a8a',
           textBright: '#aabaaa',
-          accent: '#4a7a4a',
+          accent: '#cc3333',
           accentBright: '#5a9a5a',
+          accentRed: '#cc3333',
+          accentBlue: 'rgb(65 69 203)',
         }
       },
       fontFamily: {
