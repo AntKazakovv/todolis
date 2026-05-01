@@ -1,10 +1,23 @@
+import { useState, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useTaskContext } from '../context/TaskContext'
 import TaskCard from '../components/TaskCard'
 
+const statusLabels: Record<string, string> = {
+  'queued': 'В очереди',
+  'in-progress': 'В работе',
+  'done': 'Выполнено',
+}
+
 export default function TaskList() {
   const navigate = useNavigate()
   const { state, updateTaskStatus } = useTaskContext()
+  const [toast, setToast] = useState<string | null>(null)
+
+  const showToast = useCallback((message: string) => {
+    setToast(message)
+    setTimeout(() => setToast(null), 2000)
+  }, [])
 
   async function toggleStatus(taskId: string, currentStatus: string) {
     const statusFlow: Record<string, string> = {
@@ -14,39 +27,48 @@ export default function TaskList() {
     }
     const newStatus = statusFlow[currentStatus] as 'queued' | 'in-progress' | 'done'
     await updateTaskStatus(taskId, newStatus)
+    showToast(`Статус изменен на: ${statusLabels[newStatus]}`)
   }
 
   if (state.loading) {
-    return <div className="p-4 text-center text-gray-500">Загрузка...</div>
+    return <div className="p-4 text-center text-hacker-text font-mono">Загрузка...</div>
   }
 
   return (
-    <div className="p-4 pb-20">
+    <div className="p-4 pb-20 font-mono">
       {state.error && (
-        <div className="bg-red-50 text-red-600 p-3 rounded-lg mb-4 text-sm">
+        <div className="bg-hacker-surface border-2 border-hacker-accent text-hacker-accent p-3 mb-4 text-sm">
           {state.error}
         </div>
       )}
       
       {state.tasks.length === 0 ? (
-        <p className="text-gray-600 text-center mt-8">Список задач пуст</p>
+        <p className="text-hacker-text text-center mt-8">Список задач пуст</p>
       ) : (
         <div className="space-y-3">
           {state.tasks.map(task => (
-            <div key={task.id} onClick={() => toggleStatus(task.id, task.status)} className="cursor-pointer">
-              <TaskCard task={task} />
-            </div>
+            <TaskCard 
+              key={task.id}
+              task={task} 
+              onStatusClick={() => toggleStatus(task.id, task.status)} 
+            />
           ))}
         </div>
       )}
       
       <button
         onClick={() => navigate('/task/new')}
-        className="fixed bottom-6 right-6 bg-blue-500 hover:bg-blue-600 text-white w-14 h-14 rounded-full shadow-lg text-3xl flex items-center justify-center active:scale-95 transition-transform"
+        className="fixed bottom-6 right-6 bg-hacker-surface border-2 border-hacker-accent text-hacker-accent w-14 h-14 text-3xl flex items-center justify-center active:scale-95 transition-transform font-mono"
         aria-label="Добавить задачу"
       >
         +
       </button>
+
+      {toast && (
+        <div className="fixed bottom-24 left-1/2 -translate-x-1/2 bg-hacker-surface border-2 border-hacker-accent text-hacker-accent px-4 py-2 text-sm animate-fade-in font-mono">
+          {toast}
+        </div>
+      )}
     </div>
   )
 }

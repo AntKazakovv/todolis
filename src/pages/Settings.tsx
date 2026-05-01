@@ -49,13 +49,13 @@ export default function Settings() {
   }
 
   return (
-    <div className="p-4">
+    <div className="p-4 font-mono">
       <div className="mb-6">
-        <p className="text-sm text-gray-600 mb-2">Всего задач: {state.tasks.length}</p>
+        <p className="text-sm text-hacker-text mb-2">Всего задач: {state.tasks.length}</p>
       </div>
 
       {message && (
-        <div className="bg-green-50 text-green-700 p-3 rounded-lg mb-4 text-sm">
+        <div className="bg-hacker-surface border-2 border-hacker-accent text-hacker-accent p-3 mb-4 text-sm">
           {message}
         </div>
       )}
@@ -63,24 +63,24 @@ export default function Settings() {
       <div className="space-y-3">
         <button
           onClick={handleExport}
-          className="w-full bg-blue-50 text-blue-600 py-3 rounded-lg text-base font-medium active:bg-blue-100 min-h-[44px]"
+          className="w-full bg-hacker-surface border-2 border-hacker-accent text-hacker-accent py-3 text-base font-medium active:bg-hacker-border min-h-[44px]"
         >
-          📤 Экспорт базы данных
+          [Экспорт базы данных]
         </button>
 
         <button
           onClick={handleImport}
-          className="w-full bg-green-50 text-green-600 py-3 rounded-lg text-base font-medium active:bg-green-100 min-h-[44px]"
+          className="w-full bg-hacker-surface border-2 border-hacker-accent text-hacker-accent py-3 text-base font-medium active:bg-hacker-border min-h-[44px]"
         >
-          📥 Импорт из JSON
+          [Импорт из JSON]
         </button>
 
-        <div className="pt-4 border-t border-gray-200">
+        <div className="pt-4 border-t-2 border-hacker-border">
           <button
             onClick={handleClearAll}
-            className="w-full bg-red-50 text-red-600 py-3 rounded-lg text-base font-medium active:bg-red-100 min-h-[44px]"
+            className="w-full bg-hacker-surface border-2 border-hacker-text text-hacker-text py-3 text-base font-medium active:bg-hacker-border min-h-[44px]"
           >
-            🗑️ Удалить все задачи
+            [Удалить все задачи]
           </button>
         </div>
       </div>

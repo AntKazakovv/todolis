@@ -8,7 +8,7 @@ import Settings from './pages/Settings'
 function App() {
   return (
     <TaskProvider>
-      <div className="min-h-screen bg-gray-50 max-w-2xl mx-auto">
+      <div className="min-h-screen bg-hacker-bg max-w-2xl mx-auto border-x-2 border-hacker-border">
         <NavBar />
         <Routes>
           <Route path="/" element={<TaskList />} />

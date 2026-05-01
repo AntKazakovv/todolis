@@ -19,26 +19,26 @@ export default function NavBar() {
   }
 
   return (
-    <nav className="bg-white border-b border-gray-200 px-4 py-3 flex items-center justify-between sticky top-0 z-10">
+    <nav className="bg-hacker-surface border-b-2 border-hacker-border px-4 py-3 flex items-center justify-between sticky top-0 z-10 font-mono">
       {!isHome ? (
         <button
           onClick={() => navigate(-1)}
-          className="text-blue-500 text-base min-h-[44px] min-w-[44px] flex items-center"
+          className="text-hacker-accent text-base min-h-[44px] min-w-[44px] flex items-center"
         >
-          ← Назад
+          &lt;- Назад
         </button>
       ) : (
         <div className="w-[44px]" />
       )}
-      
-      <h1 className="text-lg font-semibold text-gray-900">{title}</h1>
-      
+
+      <h1 className="text-lg font-semibold text-hacker-textBright">{title}</h1>
+
       {!isSettings ? (
         <button
           onClick={() => navigate('/settings')}
-          className="text-blue-500 text-base min-h-[44px] min-w-[44px] flex items-center justify-end"
+          className="text-hacker-accent text-base min-h-[44px] min-w-[44px] flex items-center justify-end"
         >
-          ⚙️
+          [*]
         </button>
       ) : (
         <div className="w-[44px]" />

@@ -62,41 +62,41 @@ export default function TaskEdit() {
   }
 
   return (
-    <div className="p-4">
+    <div className="p-4 font-mono">
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div>
-          <label htmlFor="text" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="text" className="block text-sm font-medium text-hacker-text mb-1">
             Описание задачи
           </label>
           <textarea
             id="text"
             {...register('text', { required: 'Введите описание' })}
-            className="w-full p-3 border border-gray-300 rounded-lg min-h-[100px] text-base"
+            className="w-full p-3 border-2 border-hacker-border bg-hacker-surface text-hacker-textBright min-h-[100px] text-base focus:border-hacker-accent outline-none"
             placeholder="Что нужно сделать?"
           />
-          {errors.text && <p className="text-red-500 text-sm mt-1">{errors.text.message}</p>}
+          {errors.text && <p className="text-hacker-accent text-sm mt-1">{errors.text.message}</p>}
         </div>
 
         <div>
-          <label htmlFor="time" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="time" className="block text-sm font-medium text-hacker-text mb-1">
             Время (необязательно)
           </label>
           <input
             id="time"
             type="time"
             {...register('time')}
-            className="w-full p-3 border border-gray-300 rounded-lg text-base"
+            className="w-full p-3 border-2 border-hacker-border bg-hacker-surface text-hacker-textBright text-base focus:border-hacker-accent outline-none"
           />
         </div>
 
         <div>
-          <label htmlFor="status" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="status" className="block text-sm font-medium text-hacker-text mb-1">
             Статус
           </label>
           <select
             id="status"
             {...register('status')}
-            className="w-full p-3 border border-gray-300 rounded-lg text-base bg-white"
+            className="w-full p-3 border-2 border-hacker-border bg-hacker-surface text-hacker-textBright text-base focus:border-hacker-accent outline-none"
           >
             <option value="queued">В очереди</option>
             <option value="in-progress">В работе</option>
@@ -106,7 +106,7 @@ export default function TaskEdit() {
 
         <button
           type="submit"
-          className="w-full bg-blue-500 text-white py-3 rounded-lg text-base font-medium active:bg-blue-600 min-h-[44px]"
+          className="w-full bg-hacker-surface border-2 border-hacker-accent text-hacker-accent py-3 text-base font-medium active:bg-hacker-border min-h-[44px]"
         >
           Сохранить
         </button>
@@ -115,7 +115,7 @@ export default function TaskEdit() {
           <button
             type="button"
             onClick={handleDelete}
-            className="w-full bg-red-50 text-red-600 py-3 rounded-lg text-base font-medium active:bg-red-100 min-h-[44px]"
+            className="w-full bg-hacker-surface border-2 border-hacker-text text-hacker-text py-3 text-base font-medium active:bg-hacker-border min-h-[44px]"
           >
             Удалить задачу
           </button>
